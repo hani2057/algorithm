@@ -243,7 +243,6 @@ cython_debug/
 *.css
 *.htm
 *.html
-*.js
 *.jsp
 *.php
 *.rss
