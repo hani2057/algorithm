@@ -3,8 +3,6 @@
  * @return {string}
  */
 
-const strs = ["flower", "flow", "flight"];
-
 var longestCommonPrefix = function (strs) {
   let result = "";
 
@@ -18,4 +16,5 @@ var longestCommonPrefix = function (strs) {
   return result;
 };
 
+const strs = ["flower", "flow", "flight"];
 console.log(longestCommonPrefix(strs));
