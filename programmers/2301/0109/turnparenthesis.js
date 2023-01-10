@@ -1,8 +1,8 @@
 function solution(s) {
-  let str = s;
-
   const left = ["[", "{", "("];
   const right = ["]", "}", ")"];
+
+  // 괄호의 조합이 맞는지 체크할 함수. boolean을 반환
   const check = (str) => {
     const stack = [];
     for (const char of str) {
@@ -14,9 +14,11 @@ function solution(s) {
         else if (stack.pop() !== left[right.indexOf(char)]) return false;
       }
     }
+    if (stack.length !== 0) return false;
     return true;
   };
 
+  let str = s;
   let cnt = 0;
   for (let i = 0; i < str.length; i++) {
     str = str.slice(1, str.length) + str[0];
