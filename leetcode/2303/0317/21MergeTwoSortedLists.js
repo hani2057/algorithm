@@ -11,12 +11,18 @@
  * @return {ListNode}
  */
 var mergeTwoLists = function (list1, list2) {
+  // 한쪽 노드가 없을 때는 있는 노드를 리턴
   if (!list1) return list2;
   else if (!list2) return list1;
+  // list1의 값이 더 작을 때는 list1을 리턴하고
+  // 리턴하는 list1에 연결된 next를 list1.next와 list2를 비교한 값으로 할당
+  // 이때 할당을 먼저 하고 리턴해준다.
   else if (list1?.val <= list2?.val) {
     list1.next = mergeTwoLists(list1?.next, list2);
     return list1;
-  } else {
+  }
+  // 상동
+  else {
     list2.next = mergeTwoLists(list1, list2?.next);
     return list2;
   }
