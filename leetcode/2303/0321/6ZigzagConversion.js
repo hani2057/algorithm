@@ -15,29 +15,38 @@ var convert = function (s, numRows) {
   // n: 지그재그 한 세트 개수
   const n = numRows + numRows - 2;
   const arr = [];
+
   for (let i = 0; i < Math.ceil(s.length / n); i++) {
-    arr.push(s.slice(n * i, n + n * i));
+    // 정방향은 numRows 개수만큼 맞춰서 arr에 푸시
+    const forward = s.slice(n * i, n * i + numRows).split("");
+    if (forward.length < numRows) {
+      forward.push(...new Array(numRows - forward.length).fill(""));
+    }
+    arr.push(forward);
+
+    // 역방향은 길이를 numRows - 2로 맞춘 뒤 reverse해서 앞뒤로 빈 문자열 채워 arr에 푸시
+    const backward = s.slice(n * i + numRows, n * i + n).split("");
+    if (backward.length < numRows - 2) {
+      backward.push(...new Array(numRows - 2 - backward.length).fill(""));
+    }
+    arr.push(["", ...backward.reverse(), ""]);
   }
 
-  // 지그재그 출력 순서
-  const order = [0];
-  let start = 1;
-  let end = n - 1;
-  while (start <= end) {
-    order.push(start);
-    order.push(end);
-    start++;
-    end--;
+  // 인덱스 차례대로 result에 붙임
+  let result = "";
+  for (let i = 0; i < numRows; i++) {
+    arr.forEach((val) => {
+      result = result + val[i];
+    });
   }
-  order.pop();
 
-  console.log("arr", arr);
-  console.log("order", order);
+  return result;
 };
 
 console.log(convert("PAYPALISHIRING", 3)); // "PAHNAPLSIIGYIR"
-console.log(convert("PAYPALISHIRING", 4)); // "PINALSIGYAHRPI"
+console.log(convert("PAYPALISHIRINGabc", 4)); // "PINALSIGYAHRPI"
 console.log(convert("A", 1)); // "A"
+console.log(convert("ABCDE", 4)); // "ABCED"
 
 // 풀이 생각
 // 5일 때
@@ -56,3 +65,8 @@ console.log(convert("A", 1)); // "A"
 // 한 세트 개수 n에 대해서
 // n씩 나눠 배열에 담은 다음
 // 순서대로 붙이기...?
+
+// a
+// b
+// c e
+// d
