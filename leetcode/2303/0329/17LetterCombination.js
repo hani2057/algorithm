@@ -19,6 +19,11 @@ var letterCombinations = function (digits) {
     8: ["t", "u", "v"],
     9: ["w", "x", "y", "z"],
   };
+
+  for (const digit of digits) {
+    for (const char of obj[digit]) {
+    }
+  }
 };
 
 console.log(letterCombinations("23")); // ["ad","ae","af","bd","be","bf","cd","ce","cf"]
